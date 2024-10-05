@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/customHook";
 import backgroundImage from "../../assets/img/DALL·E 2024-09-20 21.04.13 - A serene anime-style scene featuring blooming sakura trees, with soft, pink cherry blossoms illuminated by gentle evening light. The sky is a gradient.webp";
 import Spinner from "../../components/spinner/Spinner";
 import { YourEpisodeType } from "../../types/types";
+import ReactPlayer from "react-player"; // Добавили импорт библиотеки
 
 const EPISODES_PER_PAGE = 1;
 
@@ -99,16 +100,15 @@ const EpisodePage: React.FC = () => {
 
 						{episode.videoUrl ? (
 							<div style={{ marginTop: "10px" }}>
-								{/* Видео с автозапуском и без звука */}
-								<video controls autoPlay muted width="100%" height="auto">
-									<source src={episode.videoUrl} type="video/mp4" />
-									{/* Источник формата .webm */}
-									<source
-										src={episode.videoUrl.replace(".mp4", ".webm")}
-										type="video/webm"
-									/>
-									Ваш браузер не поддерживает видео тег.
-								</video>
+								{/* Используем ReactPlayer для воспроизведения видео */}
+								<ReactPlayer
+									url={episode.videoUrl}
+									playing={true} // Автозапуск видео
+									muted={true} // Без звука
+									controls={true} // Включить элементы управления
+									width="100%" // Ширина плеера
+									height="auto" // Автоматическая высота
+								/>
 							</div>
 						) : (
 							<Typography variant="body2" color="text.secondary">
