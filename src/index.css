@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofadi+One&display=swap');
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: "Sofadi One", system-ui;
+  animation: textColorChange 10s linear infinite;
+}
+
+@keyframes textColorChange {
+  0%, 100% { color: #ff00ff; }
+  25% { color: #00ffff; }
+  50% { color: #ffff00; }
+  75% { color: #00ff00; }
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+.glare-wrapper {
+  border-radius: 25px !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #212529;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #9a00d7, #0084ff);
+  border-radius: 10px;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+::-webkit-scrollbar-thumb {
+  background-size: 100% 200%;
+  animation: gradient-shift 3s linear infinite;
+}
+
+body::after {
+  content: '♥ 🌸 ♥';
+  position: fixed;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background: linear-gradient(to bottom, #9a00d7, #0084ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(154, 0, 215, 0.5), 0 0 20px rgba(0, 132, 255, 0.5);
+  pointer-events: none;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(-5px); }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9a00d7 #212529;
+}
+
+html {
+  scrollbar-color: #9a00d7 #212529;
+  scrollbar-width: thin;
+}
