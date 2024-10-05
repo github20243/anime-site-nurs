@@ -28,7 +28,7 @@ const EpisodePage: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getEpisodes())
+      dispatch(getEpisodes());
     }
   }, [dispatch, id]);
 
@@ -65,18 +65,18 @@ const EpisodePage: React.FC = () => {
     );
   }
 
-  const anime = episodeVideo.find((anime) => anime.id.toString() === id); 
-if (!anime) {
-  console.log("Аниме не найдено, id:", id, "доступные аниме:", episodeVideo); 
-  return (
-    <MUIContainer>
-      <Typography variant="h4" gutterBottom>
-        Аниме не найдено.
-      </Typography>
-    </MUIContainer>
-  );
-}
-  
+  const anime = episodeVideo.find((anime) => anime.id.toString() === id);
+  if (!anime) {
+    console.log("Аниме не найдено, id:", id, "доступные аниме:", episodeVideo);
+    return (
+      <MUIContainer>
+        <Typography variant="h4" gutterBottom>
+          Аниме не найдено.
+        </Typography>
+      </MUIContainer>
+    );
+  }
+
   const totalEpisodes = anime.episodes.length;
   const startIndex = (currentPage - 1) * EPISODES_PER_PAGE;
   const currentEpisodes = anime.episodes.slice(
@@ -99,13 +99,12 @@ if (!anime) {
 
             {episode.videoUrl ? (
               <div style={{ marginTop: "10px" }}>
-                <video
-                  controls
-                  width="100%"
-                  height="auto"
-                  onError={(e) => console.error("Ошибка загрузки видео:", e)}
-                >
+                <video controls width="100%" height="auto">
                   <source src={episode.videoUrl} type="video/mp4" />
+                  <source
+                    src={episode.videoUrl.replace(".mp4", ".webm")}
+                    type="video/webm"
+                  />
                   Ваш браузер не поддерживает видео тег.
                 </video>
               </div>
