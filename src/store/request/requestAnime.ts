@@ -5,10 +5,6 @@ const ANIME_CART_URL = import.meta.env.VITE_APP_URL;
 const ANIME_INFO_URL = import.meta.env.VITE_APP_ANIME_INFO_URL;
 const EPISODES_VIDEO_URL = import.meta.env.VITE_APP_ANIME_EPISODE_VIDEOS_URL;
 
-// interface GetEpisodesParams {
-// 	id: number;
-// }
-// Получение списка аниме
 export const getAnimes = createAsyncThunk<
 	Anime[],
 	void,
@@ -34,7 +30,6 @@ export const getAnimes = createAsyncThunk<
 	}
 });
 
-// Получение информации об аниме
 export const getAnimeInfo = createAsyncThunk<
 	AnimeInfo,
 	string,

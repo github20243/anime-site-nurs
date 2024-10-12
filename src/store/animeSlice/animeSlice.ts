@@ -11,7 +11,7 @@ interface AnimeState {
     isLoading: boolean;
     error: string | null;
     animeInfo: AnimeInfo | null;
-    episodeVideo: AnimeEpisode[]; // Удален animeEpisode, так как он не используется
+    episodeVideo: AnimeEpisode[]; 
 }
 
 const initialState: AnimeState = {
@@ -28,7 +28,6 @@ const animeSlice = createSlice({
     reducers: {},
     extraReducers: (builder: ActionReducerMapBuilder<AnimeState>) => {
         builder
-            // Обработка запроса аниме
             .addCase(getAnimes.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -45,7 +44,6 @@ const animeSlice = createSlice({
                 state.error = payload || "Failed to fetch animes";
             });
 
-        // Обработка запроса информации об одном аниме
         builder
             .addCase(getAnimeInfo.pending, (state) => {
                 state.isLoading = true;
@@ -63,7 +61,6 @@ const animeSlice = createSlice({
                 state.error = payload || "Failed to fetch anime info";
             });
 
-        // Обработка запроса эпизодов видео
         builder
             .addCase(getEpisodes.pending, (state) => {
                 state.isLoading = true;
@@ -73,12 +70,12 @@ const animeSlice = createSlice({
                 getEpisodes.fulfilled,
                 (state, { payload }: PayloadAction<AnimeEpisode[]>) => {
                     state.isLoading = false;
-                    state.episodeVideo = payload; // Здесь все правильно
+                    state.episodeVideo = payload; 
                 }
             )
             .addCase(getEpisodes.rejected, (state, { payload }) => {
                 state.isLoading = false;
-                state.error = (payload as string) || "Failed to fetch episodes video"; // Приведение типа payload к строке
+                state.error = (payload as string) || "Failed to fetch episodes video"; 
             });
     },
 });
