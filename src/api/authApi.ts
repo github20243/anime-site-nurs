@@ -8,36 +8,38 @@ const LOGIN_URL = import.meta.env.VITE_APP_LOGIN_URL;
 const LOGOUT_URL = import.meta.env.VITE_APP_LOGOUT_URL;
 
 export const registerUser = createAsyncThunk<
-	any,
-	RegisterData,
-	{ rejectValue: string }
+  any,
+  RegisterData,
+  { rejectValue: string }
 >("auth/registerUser", async (userData, { rejectWithValue }) => {
-	try {
-		const { data } = await axios.post(REGISTER_URL, userData);
-		toast.success("Регистрация прошла успешно!");
-		return data;
-	} catch (error) {
-		toast.error("Не удалось зарегистрироваться");
-		return rejectWithValue("Не удалось зарегистрироваться");
-	}
+  try {
+    const { data } = await axios.post(REGISTER_URL, userData);
+    toast.success("Регистрация прошла успешно!");
+    // Предполагаем, что API возвращает массив пользователей, и берем первый элемент
+    return { user: data[0] }; // Делаем user объектом из первого элемента массива
+  } catch (error) {
+    toast.error("Не удалось зарегистрироваться");
+    return rejectWithValue("Не удалось зарегистрироваться");
+  }
 });
 
+
 export const loginUser = createAsyncThunk<
-	void,
-	LoginData,
-	{ rejectValue: string }
+  any,
+  LoginData,
+  { rejectValue: string }
 >("auth/loginUser", async (loginData, { rejectWithValue }) => {
-	try {
-		const response = await axios.post(LOGIN_URL, loginData);
-		localStorage.setItem("token", response.data.token);
-		localStorage.setItem("isAuthenticated", "true");
-		toast.success("Вход выполнен успешно!");
-		return response.data;
-	} catch (error) {
-		toast.error("Не удалось войти");
-		return rejectWithValue("Не удалось войти");
-	}
+  try {
+    const { data } = await axios.post(LOGIN_URL, loginData);
+    localStorage.setItem("token", data.token);
+    toast.success("Вход выполнен успешно!");
+    return { user: data.user }; // Предполагается, что API возвращает объект пользователя
+  } catch (error) {
+    toast.error("Не удалось войти");
+    return rejectWithValue("Не удалось войти");
+  }
 });
+
 
 export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
 	"auth/logoutUser",

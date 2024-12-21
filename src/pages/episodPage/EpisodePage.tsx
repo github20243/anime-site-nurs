@@ -21,9 +21,9 @@ const EpisodePage: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { episodeVideo, isLoading, error } = useAppSelector(
-		(state) => state.anime
-	);
+	const { episodeVideo, isLoading, error } = useAppSelector((state) => state.anime);
+console.log("Эпизоды:", episodeVideo);
+
 
 	const [currentPage, setCurrentPage] = React.useState<number>(1);
 

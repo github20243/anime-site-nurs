@@ -17,6 +17,8 @@ import Spinner from "../components/spinner/Spinner";
 import SignIn from "../pages/RegistrationPage/SingIn";
 import SignUp from "../pages/RegistrationPage/SingUp";
 import { useAppSelector } from "../hooks/customHook";
+import TestPage from "../pages/TestPage";
+import Profile from "../pages/Profile";
 
 const USER_ROUTES = [
   { path: "/", element: <HomePage /> },
@@ -24,6 +26,7 @@ const USER_ROUTES = [
   { path: "/anime/:id/episodes", element: <EpisodesPage /> },
   { path: "/anime/:id/episode/:episodeIndex", element: <EpisodePage /> },
   { path: "/user/*", element: <UserRoute /> },
+  { path: "/test", element: <TestPage/> }
 ];
 
 export const Routing = () => {
@@ -79,6 +82,12 @@ export const Routing = () => {
           <SignIn />
         </AuthRoute>
       ),
+    },
+    {
+      path: "/profile",
+      element: (
+        <Profile/>
+      )
     },
     {
       path: "*",

@@ -80,4 +80,4 @@ const animeSlice = createSlice({
     },
 });
 
-export default animeSlice 
+export default animeSlice
